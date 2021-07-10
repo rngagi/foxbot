@@ -25,13 +25,16 @@ def filter_candidates_proto(query, db):
             candidates = [row for row in reader if query in row[0].lower()]
     return candidates
 
+def is_word_in_row(row, wordlist):
+    words = [w.strip(",.;:()'") for w in row[2].split()]
+    return any(w in words for w in wordlist)
+
 def filter_candidates_wordlist(query, db):
     wordlist = query.split()
     with open(db, newline='') as f:
         reader = csv.reader(f)
         candidates = [row for row in reader
-                      if any(w in row[2].split()
-                             for w in wordlist)]
+                      if is_word_in_row(row, wordlist)]
     return candidates
 
 def display_candidates(cs, lang):
