@@ -30,6 +30,10 @@ If your protoform query contains at least one uppercase character, it will becom
 > /pan *Num
 This will return all protoforms containing "Num", but not "num".
 
+PMP search is also available!
+Just start your query with /pmp
+Just like PAn, you can use unquoted word lists, quoted strings, and protoforms with a preceding asterisk (*).
+
 Have fun!
 '''
 
@@ -57,7 +61,7 @@ async def on_message(message):
 
     if message.content.startswith('/pan '):
         query = message.content.removeprefix('/pan ')
-        response = select_candidates(query)
+        response = select_candidates(query, 'pan')
         if len(response) > 10:
             await message.channel.send(
             'Too many results! Try specifying a narrower query.')
@@ -66,5 +70,15 @@ async def on_message(message):
                 await message.channel.send(item)
             return
 
+    if message.content.startswith('/pmp '):
+        query = message.content.removeprefix('/pmp ')
+        response = select_candidates(query, 'pmp')
+        if len(response) > 10:
+            await message.channel.send(
+            'Too many results! Try specifying a narrower query.')
+        else:
+            for item in response:
+                await message.channel.send(item)
+            return
 
 client.run(TOKEN)
