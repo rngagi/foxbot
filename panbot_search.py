@@ -13,13 +13,13 @@ def filter_candidates_string(query):
         return candidates
 
 def filter_candidates_proto(query):
-    case_sensitive = query.islower()
+    case_sensitive = not query.islower()
     with open('pan.csv', newline='') as f:
         reader = csv.reader(f)
         if case_sensitive:
-            candidates = [row for row in reader if query in row[0].lower()]
-        else:
             candidates = [row for row in reader if query in row[0]]
+        else:
+            candidates = [row for row in reader if query in row[0].lower()]
     return candidates
 
 def filter_candidates_wordlist(query):
