@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import discord
-from panbot_search import select_candidates
+from foxbot_search import select_candidates
 import os
 from dotenv import load_dotenv
 
@@ -53,11 +53,11 @@ async def on_message(message):
         return
 
     if msg == '/fox test':
-        response = 'Panbot operational!'
+        response = 'Foxbot operational!'
         await message.channel.send(response)
         return
 
-    if msg.strip() in ['/fox help', '/pan ?']:
+    if msg.strip() in ['/fox help', '/fox ?']:
         await message.channel.send(help_text)
         return
 
