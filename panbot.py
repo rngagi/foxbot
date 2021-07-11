@@ -47,38 +47,31 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    msg = message.content
+
     if message.author == client.user:
         return
 
-    if message.content == '/pan test':
+    if msg == '/pan test':
         response = 'Panbot operational!'
         await message.channel.send(response)
         return
 
-    if message.content.strip() in ['/pan help', '/pan ?']:
+    if msg.strip() in ['/pan help', '/pan ?']:
         await message.channel.send(help_text)
         return
 
-    if message.content.startswith('/pan '):
-        query = message.content[5:]
-        response = select_candidates(query, 'pan')
+    if msg.startswith('/pan ') \
+    or msg.startswith('/pmp '):
+        lang = msg.split()[0][1:]
+        query = msg[5:]
+        response = select_candidates(query, lang)
         if len(response) > 10:
             await message.channel.send(
             'Too many results! Try specifying a narrower query.')
         else:
             for item in response:
                 await message.channel.send(item)
-            return
-
-    if message.content.startswith('/pmp '):
-        query = message.content[5:]
-        response = select_candidates(query, 'pmp')
-        if len(response) > 10:
-            await message.channel.send(
-            'Too many results! Try specifying a narrower query.')
-        else:
-            for item in response:
-                await message.channel.send(item)
-            return
+        return
 
 client.run(TOKEN)
