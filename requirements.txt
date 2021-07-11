@@ -1,4 +1,3 @@
 discord
-csv
-dotenv
-os
+python-csv
+python-dotenv
