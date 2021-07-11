@@ -68,7 +68,7 @@ async def on_message(message):
         response = select_candidates(query, lang)
         if len(response) > 10:
             await message.channel.send(
-            'Too many results! Try specifying a narrower query.')
+            f'Too many results ({len(response)})! Try specifying a narrower query.')
         else:
             for item in response:
                 await message.channel.send(item)
