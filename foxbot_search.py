@@ -2,20 +2,19 @@
 
 import csv
 
-pan_file = 'pan.csv'
-pmp_file = 'pmp.csv'
+sdq_file = 'sdq.csv'
 
-def filter_candidates_string(query, db):
+def filter_candidates_zh(query, db):
     with open(db, newline='') as f:
         reader = csv.reader(f)
-        candidates = [row for row in reader if query in row[2]]
-    perfect_matches = [c for c in candidates if c[2] == query]
+        candidates = [row for row in reader if query in row[1]]
+    perfect_matches = [c for c in candidates if c[1] == query]
     if perfect_matches:
         return perfect_matches
     elif candidates:
         return candidates
 
-def filter_candidates_proto(query, db):
+def filter_candidates_word(query, db):
     case_sensitive = not query.islower()
     with open(db, newline='') as f:
         reader = csv.reader(f)
@@ -26,7 +25,7 @@ def filter_candidates_proto(query, db):
     return candidates
 
 def is_word_in_row(row, wordlist):
-    words = [w.strip(",.;:()'") for w in row[2].split()]
+    words = [w.strip(",.;:()'") for w in row[1].split()]
     return any(w in words for w in wordlist)
 
 def filter_candidates_wordlist(query, db):
@@ -39,23 +38,21 @@ def filter_candidates_wordlist(query, db):
 
 def display_candidates(cs, lang):
     if lang == 'pan':
-        langstr = 'PAn'
-    else:
-        langstr = 'PMP'
-
-    return [f'{langstr} **\{c[0]}** "{c[2]}" https://www.trussel2.com/acd/{c[1]}'
-            for c in cs]
+        langstr = 'Seediq'
+    # else:
+    #     langstr = 'PMP'
+	#
+    # return [f'{langstr} **\{c[0]}** "{c[2]}" https://www.trussel2.com/acd/{c[1]}'
+    #         for c in cs]
 
 def select_candidates(query, lang):
-    if lang == 'pan':
-        db = pan_file
-    else:
-        db = pmp_file
+    if lang == 'sdq':
+        db = sdq_file
+    # else:
+    #     db = pmp_file
 
-    if query.startswith('"') and query.endswith('"'):
-        candidates = filter_candidates_string(query.strip('"'), db)
-    elif query.startswith('*'):
-        candidates = filter_candidates_proto(query.lstrip('*'), db)
+    if query.startswith('^[a-z0-9^éṟɨʉ’]+$/i') and query.endswith('^[a-z0-9^éṟɨʉ’]+$/i'):
+        candidates = filter_candidates_zh(query.strip('"'), db)
     else:
         candidates = filter_candidates_wordlist(query, db)
 

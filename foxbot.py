@@ -52,17 +52,17 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if msg == '/pan test':
+    if msg == '/fox test':
         response = 'Panbot operational!'
         await message.channel.send(response)
         return
 
-    if msg.strip() in ['/pan help', '/pan ?']:
+    if msg.strip() in ['/fox help', '/pan ?']:
         await message.channel.send(help_text)
         return
 
-    if msg.startswith('/pan ') \
-    or msg.startswith('/pmp '):
+    if msg.startswith('/fox sdq ') \
+    or msg.startswith('/fox sed '):
         lang = msg.split()[0][1:]
         query = msg[5:]
         response = select_candidates(query, lang)
