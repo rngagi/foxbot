@@ -70,8 +70,7 @@ async def on_message(message):
             await message.channel.send(
             f'Too many results ({len(response)})! Try specifying a narrower query.')
         else:
-            for item in response:
-                await message.channel.send(item)
+            await message.channel.send('\n'.join(response))
         return
 
 client.run(TOKEN)

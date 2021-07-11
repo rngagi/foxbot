@@ -43,7 +43,7 @@ def display_candidates(cs, lang):
     else:
         langstr = 'PMP'
 
-    return [f'{langstr} **{c[0]}** "{c[2]}" https://www.trussel2.com/acd/{c[1]}'
+    return [f'{langstr} **\{c[0]}** "{c[2]}" https://www.trussel2.com/acd/{c[1]}'
             for c in cs]
 
 def select_candidates(query, lang):
