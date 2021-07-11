@@ -1,1 +1,1 @@
-worker : python foxbot.py
+worker : run python foxbot.py
