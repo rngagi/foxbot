@@ -37,7 +37,7 @@ def filter_candidates_wordlist(query, db):
     return candidates
 
 def display_candidates(cs, lang):
-    if lang == 'pan':
+    if lang == 'sdq':
         langstr = 'Seediq'
     # else:
     #     langstr = 'PMP'
