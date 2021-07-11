@@ -60,7 +60,7 @@ async def on_message(message):
         return
 
     if message.content.startswith('/pan '):
-        query = message.content.removeprefix('/pan ')
+        query = message.content[5:]
         response = select_candidates(query, 'pan')
         if len(response) > 10:
             await message.channel.send(
@@ -71,7 +71,7 @@ async def on_message(message):
             return
 
     if message.content.startswith('/pmp '):
-        query = message.content.removeprefix('/pmp ')
+        query = message.content[5:]
         response = select_candidates(query, 'pmp')
         if len(response) > 10:
             await message.channel.send(
