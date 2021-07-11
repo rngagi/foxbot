@@ -66,7 +66,7 @@ async def on_message(message):
         lang = msg.split()[0][1:]
         query = msg[5:]
         response = select_candidates(query, lang)
-        if len(response) > 10:
+        if len(response) > 15:
             await message.channel.send(
             f'Too many results ({len(response)})! Try specifying a narrower query.')
         else:
