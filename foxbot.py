@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-TOKEN = os.environ["TOKEN"]
-GUILD = os.environ["GUILD"]
+TOKEN = os.getenv('TOKEN')
+GUILD = os.getenv('GUILD')
 client = discord.Client()
 
 help_text = ''' Welcome to **PANBot**!
