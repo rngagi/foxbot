@@ -63,8 +63,7 @@ async def on_message(message):
         await message.channel.send(help_text)
         return
 
-    if msg.startswith('/fox sdq ') \
-    or msg.startswith('/fox sed '):
+    if msg.startswith('/sdq '):
         lang = msg.split()[0][1:]
         query = msg[5:]
         response = select_candidates(query, lang)
